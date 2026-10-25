@@ -1,4 +1,4 @@
-<!-- input feat.trd for DES-01: from final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.trd.md at commit 3637e51, produced by REQ-07 -->
+<!-- input feat.trd for DES-01: from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.trd.md at commit 3637e51, produced by REQ-07 -->
 # feat.trd: FEAT-ZD-48600
 
 Technical Requirement Document for FEAT-ZD-48600 (ZD-48600, "Show which overdue invoices belong to vendors that usually pay late"). This is a draft for the REQ-07 gate (Architect).
