@@ -1,4 +1,4 @@
-<!-- input org.architecture for DES-01: from hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.architecture.md at commit a6b3e2a, produced by source -->
+<!-- input org.architecture for DES-01: from hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.architecture.md at commit 3b03f15, produced by source -->
 # org.architecture (for FEAT-ZD-48600)
 
 Four repositories in one flow. ap_pipeline (Python 3.9: ingest.parse_feed, transform.to_model returning (records, rejected), dq.quality_report, pipeline.run) produces Invoice records; ap_forecast (Python 3.9: predict_delay_days(history), build_explanation_request(vendor, predicted_days, config=None)) predicts payment delay; ap_aging (Python 3.9: aging_buckets, days_past_due, bucket_for) computes aging; ap_portal (Node.js 22 CommonJS: renderAgingSummary) renders HTML from JSON. JSON between services carries amounts as strings with two decimals and dates as ISO strings. Keep every existing signature; add new functions.

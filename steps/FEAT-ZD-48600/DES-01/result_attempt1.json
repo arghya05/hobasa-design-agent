@@ -1,76 +1,67 @@
 {
   "structured": {
-    "approach": "This step ran in check mode because the spine reported that the TRD flags no platform-level change. I read the approved TRD and the feature's org.architecture override, which are my two contracted inputs. I also read the org-wide org/org.architecture.md baseline and org/org.decision_log.md to check for conflicts. From org.architecture I listed what the platform lays down: the four-repository flow, the runtimes, each repository's role, the JSON contract rule (amounts as two-decimal strings, ISO dates), the rule to keep every signature and add new functions, and the named public functions. I then compared each TRD component, interface, data rule and security statement against these, covering repositories, runtimes, responsibilities, contracts, signatures, storage, network and secrets, tenancy, LLM provider, the decision log, and whether the TRD itself flags a platform change. I wrote the check record with the evidence, the conclusion (no platform update needed), non-blocking notes for DES-02, and the events that would make DES-01 run in full. A shell call was blocked by the step's deny-by-default rule (G9). It was not needed; I used Read and Glob instead. I did not use the verifier subagent: the record is short and every row points to a TRD or org.architecture section I read directly.",
+    "approach": "This step ran in check mode because the TRD does not flag a platform-level change (record:intake). I read the approved TRD, the feature's org.architecture override, the base org/org.architecture.md and the decision log. I went through each statement in the platform documents: the four-repository flow, the runtimes, the signature rule, the return-shape rule, the JSON money and date rule, the no-database/no-network rule for ap_aging, tenancy and security, the LLM provider and the decisions. For each one I asked whether the TRD changes it. I then looked at the findings that come close to platform level (TQ-3 transport, the vendor key, new public functions, the bucket_for and formatAmount conflicts, and the LLM data flow) and wrote down what would make the action necessary. I wrote one check record and changed no code, configuration or architecture document. I did not use any connector because the inputs held every fact I needed.",
     "tools_used": [
-      "Skill (design-steps)",
+      "Skill:design-steps",
       "Read",
       "Glob",
       "Write"
     ],
     "claims": [
       {
-        "text": "The platform architecture for this item is four repositories in one flow (ap_pipeline, ap_forecast, ap_aging, ap_portal). The three Python repositories run Python 3.9 and ap_portal runs Node.js 22 CommonJS.",
+        "text": "The step runs as a check because its condition was not met: the TRD does not flag a platform-level change.",
+        "source": "record:intake"
+      },
+      {
+        "text": "The platform architecture describes four repositories in one flow: ap_pipeline, ap_forecast, ap_aging and ap_portal. ap_pipeline, ap_forecast and ap_aging run on Python 3.9 and ap_portal on Node.js 22 CommonJS. The rule is to keep every existing signature and add new functions.",
         "source": "org.architecture"
       },
       {
-        "text": "org.architecture requires JSON between services to carry amounts as strings with two decimals and dates as ISO strings. It also says to keep every existing signature and add new functions.",
-        "source": "org.architecture"
-      },
-      {
-        "text": "The TRD keeps the same four repositories and the same runtimes, and introduces no new language version or framework.",
+        "text": "The TRD changes only the same four repositories and adds no new repository or service (components C-1 to C-10).",
         "source": "feat.trd"
       },
       {
-        "text": "The TRD's overdue-list contract CT-1 sends amount as a two-decimal string and has no date field. It states that any date added later must be an ISO string, so it conforms to the platform JSON rule.",
+        "text": "Only two existing functions change, both additively: to_model keeps its signature and return shape and gains a paid_date record key, and build_explanation_request gains risk=None as its last parameter. The TRD's own validation records the signature rule as Pass.",
+        "source": "feat.trd"
+      },
+      {
+        "text": "The new CT-1 contract sends amount as a two-decimal string and has no date field. This applies the existing platform rule for JSON between services.",
         "source": "feat.trd; org.architecture"
       },
       {
-        "text": "Only two existing functions change in the TRD, and both additively: to_model gains a paid_date key and a 'paid_date' reject reason with an unchanged signature, and build_explanation_request gains risk=None as its last parameter. All other work is new functions.",
-        "source": "feat.trd"
-      },
-      {
-        "text": "The TRD adds no storage, schema migration or persistent data, adds no secrets, and leaves finance posting, authentication, tenancy, payment execution and the LLM provider or model unaffected.",
-        "source": "feat.trd"
-      },
-      {
-        "text": "The org-wide architecture baseline describes ap_aging as a pure library with no database, no network and no secrets, and says existing signatures and return shapes must not change. The TRD's new ap_aging functions are pure and add no new network path.",
+        "text": "The base platform document describes ap_aging as a pure Python 3.9 library with no database, no network and no secrets, and says existing signatures and return shapes must not change. The TRD adds no storage, schema migration or persistent data, and keeps aging_buckets, days_past_due and bucket_for unchanged.",
         "source": "file:hobasa-agentic-sdlc/org/org.architecture.md; feat.trd"
       },
       {
-        "text": "The decision-log conflicts the TRD found (the bucket_for boundary and formatAmount's float formatting) are in existing code inside one repository each, and are raised as separate questions TQ-1 and TQ-2, not as platform rules.",
-        "source": "feat.trd; file:hobasa-agentic-sdlc/org/org.decision_log.md"
-      },
-      {
-        "text": "The step ran as a check because the spine found the condition 'TRD flags a platform-level change' not met. The TRD contains no request for a platform architecture change, which matches that result.",
-        "source": "record:intake; feat.trd"
-      },
-      {
-        "text": "Open TRD questions that could later trigger a platform update are TQ-3 (owner of serialisation and transport between ap_aging and ap_portal) and TQ-8 (sending the vendor risk label to the external LLM provider).",
+        "text": "Finance posting, authentication, tenancy, payment execution and the LLM provider or model are explicitly not affected, and the risk tier is T2.",
         "source": "feat.trd"
+      },
+      {
+        "text": "New code is consistent with D-2026-031, D-2026-044 and D-2026-050.",
+        "source": "feat.trd; file:hobasa-agentic-sdlc/org/org.decision_log.md; record:memory"
+      },
+      {
+        "text": "Ownership of serialisation and transport between ap_aging and ap_portal is still open (TQ-3). If the answer introduces a new service or transport layer, that would be a platform-level change and DES-01 should be re-run.",
+        "source": "feat.trd"
+      },
+      {
+        "text": "Conclusion: no platform architecture update is needed now. All changes are additive functions plus one feature-level contract that follows the existing JSON rule.",
+        "source": "feat.trd; org.architecture; file:hobasa-agentic-sdlc/org/org.architecture.md"
       }
     ],
     "open_questions": [
-      "Should the platform document's function catalogue be refreshed after release to name the new public functions (delays_by_vendor, vendor_risk, overdue_with_risk, overdue_rows_to_json, renderOverdueRisk)? This is a documentation refresh only, not an architectural change.",
-      "Architect: if the answer to TQ-3 (transport and serialisation between ap_aging and ap_portal) or TQ-8 (risk label sent to the external provider) changes the platform's inter-service or external data flow, DES-01 should be re-run in full."
+      "Should org.architecture's function lists be updated to name the new public functions (delays_by_vendor, vendor_risk, overdue_with_risk, overdue_rows_to_json, renderOverdueRisk) once FEAT-ZD-48600 is released? This is documentation upkeep, not an architecture change.",
+      "The base org/org.architecture.md covers ap_aging only, while the feature override covers the four-repository flow. Should the base document be widened to the four-repository flow?"
     ],
-    "summary": "I checked whether FEAT-ZD-48600 needs the platform architecture document updated, and it does not. The approved TRD keeps the four-repository flow, the runtimes and each repository's role. It follows the JSON rule (amounts as two-decimal strings, dates as ISO strings) and the rule to keep every signature and add new functions. It adds no storage, network path, secret, tenancy or provider change, and it does not ask for a platform change itself. So the spine was right that the condition is not met. The check record lists each check and its evidence, notes for DES-02, and the events that would make DES-01 run in full. The main such events would come from the answers to TQ-3 (transport between ap_aging and ap_portal) and TQ-8 (risk label sent to the LLM provider). Nothing was changed in the platform document or anywhere else."
+    "summary": "DES-01 check for FEAT-ZD-48600: no platform architecture update is needed now. The approved TRD keeps the four-repository flow, the runtimes, every existing signature and return shape, the JSON rule for amounts and dates, the no-database/no-network property of ap_aging, the LLM provider, and tenancy and security unchanged. Every change is an additive function, plus one feature-level contract (CT-1) that follows the existing JSON rule. The check record at checks/DES-01_feat.platform_update.md lists the evidence for each platform statement and five near-platform findings. It also lists six triggers that would require a full DES-01 run, chiefly a new transport layer coming out of TQ-3 or any change to an existing signature or return shape."
   },
   "meta": {
     "subtype": "success",
     "is_error": false,
-    "num_turns": 11,
-    "session_id": "b1c38f94-a488-4892-87ab-29e90cc606a8",
-    "total_cost_usd": 0.5893187999999999,
-    "permission_denials": [
-      {
-        "tool_name": "Bash",
-        "tool_use_id": "toolu_01PBsU3BuUzAMHhhtkrMq5Ff",
-        "tool_input": {
-          "command": "ls features/FEAT-ZD-48600/org-overrides/ && ls ../agents/hobasa-design-agent/outputs/FEAT-ZD-48600/ 2>/dev/null",
-          "description": "List feature overrides and design outputs folder"
-        }
-      }
-    ],
-    "result": "{\"approach\":\"This step ran in check mode because the spine reported that the TRD flags no platform-level change. I read the approved TRD and the feature's org.architecture override, which are my two contracted inputs. I also read the org-wide org/org.architecture.md baseline and org/org.decision_log.md to check for conflicts. From org.architecture I listed what the platform lays down: the four-repository flow, the runtimes, each repository's role, the JSON contract rule (amounts as two-decimal strings, ISO dates), the rule to keep every signature and add new functions, and the named public functions. I then compared each TRD component, interface, data rule and security statement against these, covering repositories, runtimes, responsibilities, contracts, signatures, storage, network and secrets, tenancy, LLM provider, the decision log, and whether the TRD itself flags a platform change. I wrote the check record with the evidence, the conclusion (no platform update needed), non-blocking notes for DES-02, and the events that would make DES-01 run in full. A shell call was blocked by the step's deny-by-default rule (G9). It was not needed; I used Read and Glob instead. I did not use the verifier subagent: the record is short and every row points to a TRD or org.architecture section I read directly.\",\"tools_used\":[\"Skill (design-steps)\",\"Read\",\"Glob\",\"Write\"],\"claims\":[{\"text\":\"The platform architecture for this item is four repositories in one flow (ap_pipeline, ap_forecast, ap_aging, ap_portal). The three Python repositories run Python 3.9 and ap_portal runs Node.js 22 CommonJS.\",\"source\":\"org.architecture\"},{\"text\":\"org.architecture requires JSON between services to carry amounts as strings with two decimals and dates as ISO strings. It also says to keep every existing signature and add new functions.\",\"source\":\"org.architecture\"},{\"text\":\"The TRD keeps the same four repositories and the same runtimes, and introduces no new language version or framework.\",\"source\":\"feat.trd\"},{\"text\":\"The TRD's overdue-list contract CT-1 sends amount as a two-decimal string and has no date field. It states that any date added later must be an ISO string, so it conforms to the platform JSON rule.\",\"source\":\"feat.trd; org.architecture\"},{\"text\":\"Only two existing functions change in the TRD, and both additively: to_model gains a paid_date key and a 'paid_date' reject reason with an unchanged signature, and build_explanation_request gains risk=None as its last parameter. All other work is new functions.\",\"source\":\"feat.trd\"},{\"text\":\"The TRD adds no storage, schema migration or persistent data, adds no secrets, and leaves finance posting, authentication, tenancy, payment execution and the LLM provider or model unaffected.\",\"source\":\"feat.trd\"},{\"text\":\"The org-wide architecture baseline describes ap_aging as a pure library with no database, no network and no secrets, and says existing signatures and return shapes must not change. The TRD's new ap_aging functions are pure and add no new network path.\",\"source\":\"file:hobasa-agentic-sdlc/org/org.architecture.md; feat.trd\"},{\"text\":\"The decision-log conflicts the TRD found (the bucket_for boundary and formatAmount's float formatting) are in existing code inside one repository each, and are raised as separate questions TQ-1 and TQ-2, not as platform rules.\",\"source\":\"feat.trd; file:hobasa-agentic-sdlc/org/org.decision_log.md\"},{\"text\":\"The step ran as a check because the spine found the condition 'TRD flags a platform-level change' not met. The TRD contains no request for a platform architecture change, which matches that result.\",\"source\":\"record:intake; feat.trd\"},{\"text\":\"Open TRD questions that could later trigger a platform update are TQ-3 (owner of serialisation and transport between ap_aging and ap_portal) and TQ-8 (sending the vendor risk label to the external LLM provider).\",\"source\":\"feat.trd\"}],\"open_questions\":[\"Should the platform document's function catalogue be refreshed after release to name the new public functions (delays_by_vendor, vendor_risk, overdue_with_risk, overdue_rows_to_json, renderOverdueRisk)? This is a documentation refresh only, not an architectural change.\",\"Architect: if the answer to TQ-3 (transport and serialisation between ap_aging and ap_portal) or TQ-8 (risk label sent to the external provider) changes the platform's inter-service or external data flow, DES-01 should be re-run in full.\"],\"summary\":\"I checked whether FEAT-ZD-48600 needs the platform architecture document updated, and it does not. The approved TRD keeps the four-repository flow, the runtimes and each repository's role. It follows the JSON rule (amounts as two-decimal strings, dates as ISO strings) and the rule to keep every signature and add new functions. It adds no storage, network path, secret, tenancy or provider change, and it does not ask for a platform change itself. So the spine was right that the condition is not met. The check record lists each check and its evidence, notes for DES-02, and the events that would make DES-01 run in full. The main such events would come from the answers to TQ-3 (transport between ap_aging and ap_portal) and TQ-8 (risk label sent to the LLM provider). Nothing was changed in the platform document or anywhere else.\"}"
+    "num_turns": 10,
+    "session_id": "9e526762-efda-4c68-b8e0-4a8abb79a33a",
+    "total_cost_usd": 0.5210594000000001,
+    "permission_denials": [],
+    "result": "{\"approach\":\"This step ran in check mode because the TRD does not flag a platform-level change (record:intake). I read the approved TRD, the feature's org.architecture override, the base org/org.architecture.md and the decision log. I went through each statement in the platform documents: the four-repository flow, the runtimes, the signature rule, the return-shape rule, the JSON money and date rule, the no-database/no-network rule for ap_aging, tenancy and security, the LLM provider and the decisions. For each one I asked whether the TRD changes it. I then looked at the findings that come close to platform level (TQ-3 transport, the vendor key, new public functions, the bucket_for and formatAmount conflicts, and the LLM data flow) and wrote down what would make the action necessary. I wrote one check record and changed no code, configuration or architecture document. I did not use any connector because the inputs held every fact I needed.\",\"tools_used\":[\"Skill:design-steps\",\"Read\",\"Glob\",\"Write\"],\"claims\":[{\"text\":\"The step runs as a check because its condition was not met: the TRD does not flag a platform-level change.\",\"source\":\"record:intake\"},{\"text\":\"The platform architecture describes four repositories in one flow: ap_pipeline, ap_forecast, ap_aging and ap_portal. ap_pipeline, ap_forecast and ap_aging run on Python 3.9 and ap_portal on Node.js 22 CommonJS. The rule is to keep every existing signature and add new functions.\",\"source\":\"org.architecture\"},{\"text\":\"The TRD changes only the same four repositories and adds no new repository or service (components C-1 to C-10).\",\"source\":\"feat.trd\"},{\"text\":\"Only two existing functions change, both additively: to_model keeps its signature and return shape and gains a paid_date record key, and build_explanation_request gains risk=None as its last parameter. The TRD's own validation records the signature rule as Pass.\",\"source\":\"feat.trd\"},{\"text\":\"The new CT-1 contract sends amount as a two-decimal string and has no date field. This applies the existing platform rule for JSON between services.\",\"source\":\"feat.trd; org.architecture\"},{\"text\":\"The base platform document describes ap_aging as a pure Python 3.9 library with no database, no network and no secrets, and says existing signatures and return shapes must not change. The TRD adds no storage, schema migration or persistent data, and keeps aging_buckets, days_past_due and bucket_for unchanged.\",\"source\":\"file:hobasa-agentic-sdlc/org/org.architecture.md; feat.trd\"},{\"text\":\"Finance posting, authentication, tenancy, payment execution and the LLM provider or model are explicitly not affected, and the risk tier is T2.\",\"source\":\"feat.trd\"},{\"text\":\"New code is consistent with D-2026-031, D-2026-044 and D-2026-050.\",\"source\":\"feat.trd; file:hobasa-agentic-sdlc/org/org.decision_log.md; record:memory\"},{\"text\":\"Ownership of serialisation and transport between ap_aging and ap_portal is still open (TQ-3). If the answer introduces a new service or transport layer, that would be a platform-level change and DES-01 should be re-run.\",\"source\":\"feat.trd\"},{\"text\":\"Conclusion: no platform architecture update is needed now. All changes are additive functions plus one feature-level contract that follows the existing JSON rule.\",\"source\":\"feat.trd; org.architecture; file:hobasa-agentic-sdlc/org/org.architecture.md\"}],\"open_questions\":[\"Should org.architecture's function lists be updated to name the new public functions (delays_by_vendor, vendor_risk, overdue_with_risk, overdue_rows_to_json, renderOverdueRisk) once FEAT-ZD-48600 is released? This is documentation upkeep, not an architecture change.\",\"The base org/org.architecture.md covers ap_aging only, while the feature override covers the four-repository flow. Should the base document be widened to the four-repository flow?\"],\"summary\":\"DES-01 check for FEAT-ZD-48600: no platform architecture update is needed now. The approved TRD keeps the four-repository flow, the runtimes, every existing signature and return shape, the JSON rule for amounts and dates, the no-database/no-network property of ap_aging, the LLM provider, and tenancy and security unchanged. Every change is an additive function, plus one feature-level contract (CT-1) that follows the existing JSON rule. The check record at checks/DES-01_feat.platform_update.md lists the evidence for each platform statement and five near-platform findings. It also lists six triggers that would require a full DES-01 run, chiefly a new transport layer coming out of TQ-3 or any change to an existing signature or return shape.\"}"
   }
 }
