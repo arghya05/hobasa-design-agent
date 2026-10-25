@@ -1,0 +1,16 @@
+{
+  "unsupported": [],
+  "improvements": [
+    "feat.tier section 5 cites \"record:brief, G7\" for \"protected oracles owned by QA and SMEs; the critic re-check applies to T3 only\". The DES-04 step brief has no G7 and no wording about the critic re-check. The content comes from the design agent's own definition (hobasa-design-agent/.claude/agents/design.md:36, \"G7 Independent verification ... critic re-check for T3\"), and feat.trd section 5 also mentions protected oracles. Cite that file instead of record:brief. The paraphrase also leaves out the SonarQube and schema machine checks that G7 lists.",
+    "feat.tasks puts the new ap_forecast and ap_aging tests in new files (tests/test_risk.py, tests/test_overdue.py). The approved stories assigned them to the existing files (feat.stories TK-03.2 \u2192 test_forecast.py, TK-05.2 \u2192 test_aging.py, SA-6). feat.design B2.5/B3.5 and CL-X4 allow either choice, but the tasks should say outright that they replace the story-level task wording, so the stories and tasks don't disagree.",
+    "The workbook outcome is a 'Committed user story', but the output leaves commitment, priority and iteration to the PM (SQ-1, SQ-4) and gives no numeric estimate (TKQ-1). That is reasonable and openly stated. A short checklist of what the Developer gate must confirm before the stories count as committed (TA-1..TA-5, TKQ-1..3) would make the gate decision easier.",
+    "TSK-08's size M is agent judgement, and it is labelled as such. Give the Testing Agent a scope budget like the other tasks have, for example how many synthetic feed rows to use and which assertions are required (AC-08.1..4)."
+  ],
+  "scores": {
+    "correct": 5,
+    "complete": 4,
+    "grounded": 5,
+    "useful": 5
+  },
+  "notes": "I checked both outputs line by line against feat.stories, feat.design, feat.clarifications, org.risk_map and the tool view code. They hold up. Every task TSK-01..TSK-08 maps one-to-one to STORY-01..08 and to DT-1..DT-7 / B5, and the dependencies match the inputs: feat.stories section 2, design Part C and clarifications section 10. The sizes are carried correctly from Part C (M,S,S,S,M,S,M), and TSK-08's M is labelled as agent judgement. The AC ranges, pending markers, TRD test mapping (T-1..T-17), test names, constants, version numbers (0.4.0/0.9.0/1.4.0/2.3.0) and CI rules (90% coverage, 140 characters per line, the console.log/eval( text match) all match their sources. The claim that `bucket_for(30)` returns \"31-60\" matches aging.py. In feat.tier, T2 and its basis quote org.risk_map verbatim, the confirmation is correctly shown as pending at the Developer gate, and each task's check against the four risk areas is grounded in the design (SE-1, A6, NF-6, NF-10). The only grounding weakness is the G7 citation in tier section 5: the content is real (it is in the agent's own definition) but it is attributed to record:brief. That is a citation-precision issue, not an invented fact. New elements are labelled as agent judgement or as assumptions TA-1..TA-5 and TKQ-1..3: the task IDs, the S/M scope budgets, the version-step owners, the test-file split and the commit format."
+}
