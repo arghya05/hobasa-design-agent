@@ -87,7 +87,7 @@
         "tool_name": "Bash",
         "tool_use_id": "toolu_01R8EXbbEP1cQ7VuDMZMSQxT",
         "tool_input": {
-          "command": "cd hobasa-design-agent/outputs/FEAT-ZD-48600 && sed -i '' 's/TQ-D\\([0-9]\\)/TKQ-\\1/g' feat.tasks.md && grep -c 'TKQ-' feat.tasks.md",
+          "command": "cd final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/outputs/FEAT-ZD-48600 && sed -i '' 's/TQ-D\\([0-9]\\)/TKQ-\\1/g' feat.tasks.md && grep -c 'TKQ-' feat.tasks.md",
           "description": "Rename task open-question IDs to avoid clash with TRD IDs"
         }
       }

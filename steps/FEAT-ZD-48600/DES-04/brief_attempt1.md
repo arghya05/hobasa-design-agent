@@ -8,14 +8,14 @@ Task creation for actual engineering effort for each committed user story
 - Gate (who approves this output): Developer
 
 ## Inputs (GitHub checkout; read them with Read, or context_get for a receipt)
-- feat.stories (Epics, stories and tasks with numbered AC, frame links, assumptions and open items (latest revision)): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-04/feat.stories.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.stories.md at commit 0590ea4)
-- feat.design (HLD, LLD and contracts): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-04/feat.design.md` (from hobasa-design-agent/outputs/FEAT-ZD-48600/feat.design.md at commit 722a98f)
-- feat.clarifications (Questions, assumptions and answers): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-04/feat.clarifications.md` (from hobasa-design-agent/outputs/FEAT-ZD-48600/feat.clarifications.md at commit 36d4dac)
-- org.risk_map (High-risk paths per repository for tiering): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-04/org.risk_map.md` (from hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.risk_map.md at commit a6b3e2a)
+- feat.stories (Epics, stories and tasks with numbered AC, frame links, assumptions and open items (latest revision)): `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-04/feat.stories.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.stories.md at commit 0590ea4)
+- feat.design (HLD, LLD and contracts): `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-04/feat.design.md` (from hobasa-design-agent/outputs/FEAT-ZD-48600/feat.design.md at commit 722a98f)
+- feat.clarifications (Questions, assumptions and answers): `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-04/feat.clarifications.md` (from hobasa-design-agent/outputs/FEAT-ZD-48600/feat.clarifications.md at commit 36d4dac)
+- org.risk_map (High-risk paths per repository for tiering): `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-04/org.risk_map.md` (from hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.risk_map.md at commit a6b3e2a)
 
 ## Outputs (write each file in full; the spine commits and pushes after evaluation and approval)
-- feat.tasks (Engineering tasks with goal, AC, dependencies and size budget): write `hobasa-design-agent/outputs/FEAT-ZD-48600/feat.tasks.md`
-- feat.tier (Risk tier T1–T3 and who confirmed it): write `hobasa-design-agent/outputs/FEAT-ZD-48600/feat.tier.md`
+- feat.tasks (Engineering tasks with goal, AC, dependencies and size budget): write `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/outputs/FEAT-ZD-48600/feat.tasks.md`
+- feat.tier (Risk tier T1–T3 and who confirmed it): write `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/outputs/FEAT-ZD-48600/feat.tier.md`
 
 
 ## How to work
