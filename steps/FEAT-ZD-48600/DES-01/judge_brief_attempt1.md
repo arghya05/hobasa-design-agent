@@ -14,8 +14,11 @@
 {"check_mode": "condition not met: TRD flags a platform-level change"}
 
 ## Other GitHub files the agent read (valid sources when cited as file:<repository>/<path>)
+- `~/.claude/projects/-Users-arghyamukherjee-Documents-automaiton-final-document-e2e-run-runs-run-20261025-205213-feat-zd-48600-workspace-hobasa-agentic-sdlc/d221d2a0-c6b6-4af1-9b5b-96834fd93dfe/tool-results/hook-8d76c0ac-f020-4b22-a535-340cea60935c-1-additionalContext.txt`
 - `hobasa-design-agent/.claude/skills/design-steps/SKILL.md`
 - `hobasa-design-agent/CLAUDE.md`
+- `hobasa-design-agent/outputs/FEAT-ZD-48600/checks/DES-01_feat.platform_update.md`
+- `hobasa-design-agent/outputs/FEAT-ZD-48600/feat.design.md`
 - `ap-aging-sample/CLAUDE.md`
 - `ap-forecast-sample/CLAUDE.md`
 - `ap-pipeline-sample/CLAUDE.md`
@@ -43,7 +46,7 @@ Shared memory and conventions: `memory/MEMORY.md` and `CLAUDE.md` in the SDLC re
 
 ## Inputs (GitHub checkout; read them with Read, or context_get for a receipt)
 - feat.trd (Approved TRD): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-01/feat.trd.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.trd.md at commit 3637e51)
-- org.architecture (Platform architecture, contracts and tenancy rules): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-01/org.architecture.md` (from hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.architecture.md at commit 76d03ce)
+- org.architecture (Platform architecture, contracts and tenancy rules): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-01/org.architecture.md` (from hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.architecture.md at commit e8afce8)
 
 ## Outputs (write each file in full; the spine commits and pushes after evaluation and approval)
 - feat.platform_update (Platform architecture change (when flagged)): write `hobasa-design-agent/outputs/FEAT-ZD-48600/checks/DES-01_feat.platform_update.md`
@@ -59,4 +62,4 @@ Decide the best way to do this step from the inputs and the workbook action, pla
   "check_mode": "condition not met: TRD flags a platform-level change"
 }
 
-Finish with the structured result: approach, tools_used, claims (each citing an input item name, a tool view, api:<name>, mcp:<server>, file:<repository>/<path> for any other GitHub file you read, record:intake, record:owner_answer, record:memory or record:brief for this brief; a claim drawing on several sources lists them separated by ';'; every number must appear in what you cite), open questions (BLOCKING: only when you cannot finish), summary.
+Finish with the structured result: approach, tools_used, claims (each citing an input item name, a tool view, api:<name>, mcp:<server>, file:<repository>/<path> for any other GitHub file you read, record:intake, record:owner_answer, record:memory or record:brief for this brief; a claim drawing on several sources lists them separated by ';'; every number must appear in what you cite), open questions (anything missing or unclear: BLOCKING: <what you need and who should answer>; never assume), summary.
