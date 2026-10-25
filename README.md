@@ -14,3 +14,11 @@ Design Agent (incl. Review Agent) in the Hobasa agentic SDLC. Owner: Architect o
 | DES-02 | Design Document | feat.prd, feat.prototype, feat.trd, org.architecture, org.data_model, org.design_library | feat.design, feat.screens | Architect, UX lead |
 | DES-03 | Understand HLD or LLD+ Doubts Clarifications | feat.design, feat.stories, feat.trd | feat.clarifications | checks + sampled evaluation |
 | DES-04 | Task Creation | feat.stories, feat.design, feat.clarifications, org.risk_map | feat.tasks, feat.tier | Developer |
+
+<!-- work:FEAT-ZD-48600:start -->
+## Work done for FEAT-ZD-48600
+
+| Step | Name | Status | Input | Output | Details |
+|---|---|---|---|---|---|
+| DES-02 | Design Document | done | `feat.prd`, `feat.prototype`, `feat.trd`, `org.architecture`, `org.data_model`, `org.design_library` | `feat.design`: [Markdown](https://github.com/arghya05/hobasa-design-agent/blob/main/outputs/FEAT-ZD-48600/feat.design.md) · [HTML](https://htmlpreview.github.io/?https://raw.githubusercontent.com/arghya05/hobasa-design-agent/main/docs/FEAT-ZD-48600/DES-02_feat-design.html) · [PDF](https://github.com/arghya05/hobasa-design-agent/blob/main/docs/FEAT-ZD-48600/DES-02_feat-design.pdf)<br>`feat.screens`: [Markdown](https://github.com/arghya05/hobasa-design-agent/blob/main/outputs/FEAT-ZD-48600/feat.screens.md) · [HTML](https://htmlpreview.github.io/?https://raw.githubusercontent.com/arghya05/hobasa-design-agent/main/docs/FEAT-ZD-48600/DES-02_feat-screens.html) · [PDF](https://github.com/arghya05/hobasa-design-agent/blob/main/docs/FEAT-ZD-48600/DES-02_feat-screens.pdf) | [step record](https://github.com/arghya05/hobasa-design-agent/blob/main/steps/FEAT-ZD-48600/DES-02/README.md) |
+<!-- work:FEAT-ZD-48600:end -->
