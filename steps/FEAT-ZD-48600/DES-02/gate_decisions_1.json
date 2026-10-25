@@ -1,0 +1,20 @@
+[
+  {
+    "role": "Architect",
+    "by": "sim.architect",
+    "decision": "approve",
+    "scores": null,
+    "comment": "automated checks and the independent judge passed",
+    "reason": null,
+    "simulated": true
+  },
+  {
+    "role": "UX lead",
+    "by": "sim.ux_lead",
+    "decision": "approve",
+    "scores": null,
+    "comment": "automated checks and the independent judge passed",
+    "reason": null,
+    "simulated": true
+  }
+]
