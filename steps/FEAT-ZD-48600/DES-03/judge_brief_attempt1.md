@@ -4,41 +4,41 @@
 - Workbook outcome: Assumptions, Questions or Clarifications would be looped till the developer has achieved complete clarity
 
 ## Outputs to evaluate
-- `hobasa-design-agent/outputs/FEAT-ZD-48600/feat.clarifications.md`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/outputs/FEAT-ZD-48600/feat.clarifications.md`
 
 ## Inputs the agent was given
-- feat.design: `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.design.md`
-- feat.stories: `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.stories.md`
-- feat.trd: `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.trd.md`
+- feat.design: `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.design.md`
+- feat.stories: `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.stories.md`
+- feat.trd: `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.trd.md`
 
 ## Other GitHub files the agent read (valid sources when cited as file:<repository>/<path>)
-- `hobasa-design-agent/outputs/FEAT-ZD-48600/feat.clarifications.md`
-- `hobasa-design-agent/outputs/FEAT-ZD-48600/feat.screens.md`
-- `hobasa-design-agent/steps/FEAT-ZD-48600/DES-02/gate_decisions_1.json`
-- `ap-aging-sample/.git/config`
-- `ap-aging-sample/CLAUDE.md`
-- `ap-aging-sample/README.md`
-- `ap-aging-sample/ci.py`
-- `ap-aging-sample/src/ap_aging/__init__.py`
-- `ap-aging-sample/src/ap_aging/aging.py`
-- `ap-aging-sample/tests/test_aging.py`
-- `ap-forecast-sample/CLAUDE.md`
-- `ap-forecast-sample/ci.py`
-- `ap-forecast-sample/src/ap_forecast/__init__.py`
-- `ap-forecast-sample/src/ap_forecast/explain.py`
-- `ap-forecast-sample/src/ap_forecast/predict.py`
-- `ap-forecast-sample/tests/test_forecast.py`
-- `ap-pipeline-sample/CLAUDE.md`
-- `ap-pipeline-sample/ci.py`
-- `ap-pipeline-sample/src/ap_pipeline/__init__.py`
-- `ap-pipeline-sample/src/ap_pipeline/transform.py`
-- `ap-pipeline-sample/tests/test_pipeline.py`
-- `ap-portal-sample/CLAUDE.md`
-- `ap-portal-sample/ci.mjs`
-- `ap-portal-sample/package.json`
-- `ap-portal-sample/src/ap_portal/index.js`
-- `ap-portal-sample/tests/portal.test.js`
-- `hobasa-agentic-sdlc/features/FEAT-ZD-48600/COMMUNICATION.md`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/outputs/FEAT-ZD-48600/feat.clarifications.md`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/outputs/FEAT-ZD-48600/feat.screens.md`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/steps/FEAT-ZD-48600/DES-02/gate_decisions_1.json`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_aging/.git/config`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_aging/CLAUDE.md`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_aging/README.md`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_aging/ci.py`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_aging/src/ap_aging/__init__.py`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_aging/src/ap_aging/aging.py`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_aging/tests/test_aging.py`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_forecast/CLAUDE.md`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_forecast/ci.py`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_forecast/src/ap_forecast/__init__.py`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_forecast/src/ap_forecast/explain.py`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_forecast/src/ap_forecast/predict.py`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_forecast/tests/test_forecast.py`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_pipeline/CLAUDE.md`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_pipeline/ci.py`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_pipeline/src/ap_pipeline/__init__.py`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_pipeline/src/ap_pipeline/transform.py`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_pipeline/tests/test_pipeline.py`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_portal/CLAUDE.md`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_portal/ci.mjs`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_portal/package.json`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_portal/src/ap_portal/index.js`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/ap_portal/tests/portal.test.js`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/hobasa-agentic-sdlc/features/FEAT-ZD-48600/COMMUNICATION.md`
 
 Shared memory and conventions: `memory/MEMORY.md` and `CLAUDE.md` in the SDLC repository.
 
@@ -53,12 +53,12 @@ Shared memory and conventions: `memory/MEMORY.md` and `CLAUDE.md` in the SDLC re
 - Gate (who approves this output): no gate: automated checks, the independent judge and sampled human evaluation
 
 ## Inputs (GitHub checkout; read them with Read, or context_get for a receipt)
-- feat.design (HLD, LLD and contracts): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.design.md` (from hobasa-design-agent/outputs/FEAT-ZD-48600/feat.design.md at commit 722a98f)
-- feat.stories (Epics, stories and tasks with numbered AC, frame links, assumptions and open items (latest revision)): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.stories.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.stories.md at commit 0590ea4)
-- feat.trd (Approved TRD): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.trd.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.trd.md at commit 3637e51)
+- feat.design (HLD, LLD and contracts): `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.design.md` (from hobasa-design-agent/outputs/FEAT-ZD-48600/feat.design.md at commit 722a98f)
+- feat.stories (Epics, stories and tasks with numbered AC, frame links, assumptions and open items (latest revision)): `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.stories.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.stories.md at commit 0590ea4)
+- feat.trd (Approved TRD): `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.trd.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.trd.md at commit 3637e51)
 
 ## Outputs (write each file in full; the spine commits and pushes after evaluation and approval)
-- feat.clarifications (Questions, assumptions and answers): write `hobasa-design-agent/outputs/FEAT-ZD-48600/feat.clarifications.md`
+- feat.clarifications (Questions, assumptions and answers): write `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/outputs/FEAT-ZD-48600/feat.clarifications.md`
 
 
 ## How to work

@@ -88,7 +88,7 @@
         "tool_name": "Bash",
         "tool_use_id": "toolu_014u4c8wTFECsheJG7B4P82b",
         "tool_input": {
-          "command": "cd run/workspace; ls hobasa-agentic-sdlc/features/FEAT-ZD-48600 hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides agents/hobasa-design-agent/steps/FEAT-ZD-48600/* agents/hobasa-design-agent/outputs/FEAT-ZD-48600 2>&1; for r in ap_aging ap_forecast ap_pipeline ap_portal; do echo \"== $r\"; git -C $r remote -v | head -1; ls $r; done",
+          "command": "cd final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace; ls hobasa-agentic-sdlc/features/FEAT-ZD-48600 hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides agents/hobasa-design-agent/steps/FEAT-ZD-48600/* agents/hobasa-design-agent/outputs/FEAT-ZD-48600 2>&1; for r in ap_aging ap_forecast ap_pipeline ap_portal; do echo \"== $r\"; git -C $r remote -v | head -1; ls $r; done",
           "description": "List feature, step records and app repo layout"
         }
       }

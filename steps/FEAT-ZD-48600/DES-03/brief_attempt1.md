@@ -7,12 +7,12 @@
 - Gate (who approves this output): no gate: automated checks, the independent judge and sampled human evaluation
 
 ## Inputs (GitHub checkout; read them with Read, or context_get for a receipt)
-- feat.design (HLD, LLD and contracts): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.design.md` (from hobasa-design-agent/outputs/FEAT-ZD-48600/feat.design.md at commit 722a98f)
-- feat.stories (Epics, stories and tasks with numbered AC, frame links, assumptions and open items (latest revision)): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.stories.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.stories.md at commit 0590ea4)
-- feat.trd (Approved TRD): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.trd.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.trd.md at commit 3637e51)
+- feat.design (HLD, LLD and contracts): `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.design.md` (from hobasa-design-agent/outputs/FEAT-ZD-48600/feat.design.md at commit 722a98f)
+- feat.stories (Epics, stories and tasks with numbered AC, frame links, assumptions and open items (latest revision)): `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.stories.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.stories.md at commit 0590ea4)
+- feat.trd (Approved TRD): `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-03/feat.trd.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.trd.md at commit 3637e51)
 
 ## Outputs (write each file in full; the spine commits and pushes after evaluation and approval)
-- feat.clarifications (Questions, assumptions and answers): write `hobasa-design-agent/outputs/FEAT-ZD-48600/feat.clarifications.md`
+- feat.clarifications (Questions, assumptions and answers): write `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/outputs/FEAT-ZD-48600/feat.clarifications.md`
 
 
 ## How to work
