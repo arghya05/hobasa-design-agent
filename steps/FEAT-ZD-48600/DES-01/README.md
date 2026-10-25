@@ -9,8 +9,8 @@
 
 | Item | Prepared input (this repository) | Read from (producer in GitHub) | Commit | Produced by |
 |---|---|---|---|---|
-| feat.trd | hobasa-design-agent/inputs/FEAT-ZD-48600/DES-01/feat.trd.md | hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.trd.md | 3637e51 | REQ-07 |
-| org.architecture | hobasa-design-agent/inputs/FEAT-ZD-48600/DES-01/org.architecture.md | hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.architecture.md | 3b03f15 | source |
+| feat.trd | hobasa-design-agent/inputs/FEAT-ZD-48600/DES-01/feat.trd.md | final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.trd.md | 3637e51 | REQ-07 |
+| org.architecture | hobasa-design-agent/inputs/FEAT-ZD-48600/DES-01/org.architecture.md | hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.architecture.md | b6a392f | source |
 
 Full brief per attempt: `brief_attempt<N>.md` (trigger event, owner answers, tool view, refusal reasons).
 
@@ -22,8 +22,8 @@ Full brief per attempt: `brief_attempt<N>.md` (trigger event, owner answers, too
 
 ## How the agent worked
 
-- Approach: This step ran in check mode because the TRD does not flag a platform-level change (record:intake). I read the approved TRD, the feature's org.architecture override, the base org/org.architecture.md and the decision log. I went through each statement in the platform documents: the four-repository flow, the runtimes, the signature rule, the return-shape rule, the JSON money and date rule, the no-database/no-network rule for ap_aging, tenancy and security, the LLM provider and the decisions. For each one I asked whether the TRD changes it. I then looked at the findings that come close to platform level (TQ-3 transport, the vendor key, new public functions, the bucket_for and formatAmount conflicts, and the LLM data flow) and wrote down what would make the action necessary. I wrote one check record and changed no code, configuration or architecture document. I did not use any connector because the inputs held every fact I needed.
-- Tools used: Skill:design-steps, Read, Glob, Write
+- Approach: Check mode (condition not met: the TRD does not flag a platform-level change). I loaded the design-steps skill for DES-01. Then I read both contracted inputs in full: feat.trd and the feature's org.architecture override. From org.architecture I took six platform elements: topology, runtimes, repository roles, the inter-service JSON rule, the compatibility rule, and the security/tenancy boundary (from TRD S-1). I checked each TRD component, interface, data item and security item against those elements (CK-1 to CK-10). I wrote the check record with the evidence, the conclusion and the triggers that would turn this into a real update. I changed no architecture document, code or configuration. I also read the journey board for context. It showed that the downstream design steps were already approved on the same no-change position, but I did not cite that in my claims.
+- Tools used: Skill (design-steps), Read, Grep, Write
 - Helper subagents: none
 - Connector calls: none
 
@@ -31,13 +31,14 @@ Full brief per attempt: `brief_attempt<N>.md` (trigger event, owner answers, too
 
 | Attempt | Session | Checks failed | Judge unsupported | Judge scores |
 |---|---|---|---|---|
-| 1 | new | 0 | 0 | {'correct': 5, 'complete': 5, 'grounded': 4, 'useful': 5} |
+| 1 | new | 0 | 0 | {'correct': 5, 'complete': 4, 'grounded': 5, 'useful': 4} |
 
 ## Improvements the independent judge suggests (non-blocking, for the people at the gate)
 
-- P-7 credits the guardrail "stop when tenancy or security impact is unclear" to record:brief. The DES-01 brief does not contain that text. It comes from the design agent definition (hobasa-design-agent/.claude/agents/design.md:45). The guardrail is real, so this is not an invented fact, but the citation should name the agent definition and not the brief.
-- N-2 and N-3 (and §3) say what DES-02 does: it reads org.data_model and lists new functions in the design document. None of the DES-01 inputs or the files read state this. Either cite the design-steps procedure or call it process context.
-- X-2 gives a fix to `bucket_for` that changes aging totals as an example of a signature or return-shape change. Such a fix changes behaviour, not the signature or the return shape. The record would be more precise if it said a behaviour or output change to an existing public function would trigger the action (the base doc's backward-compatibility rule), and not call it a signature change.
-- The check compares the TRD against the platform documents and the TRD's own code findings. It does not re-read the app repositories itself. That is acceptable for a design check, but the record could say plainly that the code-level evidence comes from feat.trd F-1 to F-15 and was not re-verified in this step.
+- Section 1 says 'org.architecture defines the platform as these elements', but P-6 (security and tenancy boundary) comes from feat.trd S-1, not org.architecture. The row's source column is right, but the lead-in sentence overstates it. Reword the lead-in or label P-6 as a platform boundary taken from the TRD.
+- P-1 writes the topology as 'ap_pipeline → ap_forecast / ap_aging → ap_portal'. org.architecture only says 'Four repositories in one flow' and gives each repository's role; it never states the arrow order. Say this order is inferred from the roles and from TRD IF-8, or cite IF-8 as well.
+- CK-6 quotes TRD section 3 ('No storage, schema migration or new persistent data. Every new function is in-memory and pure.') but leaves out the TRD's own caveat '(agent judgement; the code read has no database layer)'. Keep the caveat so readers know the no-storage conclusion rests on the TRD agent's judgement and not on a stated fact.
+- Several TRD items (CT-1, CR-4/IF-4 risk parameter, C-7 serialiser) are still open TRD-design proposals pending Architect approval (TQ-3, TQ-4). The conclusion could say explicitly that 'no platform change' depends on those proposals being accepted as written. TR-1 and TR-4 partly cover this.
+- TR-4 links R-3/PQ-5 (PROV-ACME-2026-11 also changing build_explanation_request) to 'LLM provider or model changes'. R-3 in the TRD is about a merge conflict on the same function, not a provider change. Make that link more precise.
 
 Details: `result_attempt<N>.json` (claims with sources), `checks_attempt<N>.json`, `judge_attempt<N>.json`.

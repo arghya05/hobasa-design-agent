@@ -14,8 +14,19 @@
 {"check_mode": "condition not met: TRD flags a platform-level change"}
 
 ## Other GitHub files the agent read (valid sources when cited as file:<repository>/<path>)
-- `hobasa-agentic-sdlc/org/org.architecture.md`
-- `hobasa-agentic-sdlc/org/org.decision_log.md`
+- `~/.claude/projects/-Users-arghyamukherjee-Documents-automaiton-final-document-e2e-run-runs-run-20261025-201308-feat-zd-48600-workspace-hobasa-agentic-sdlc/9888b830-7784-4da1-a25a-44af8413a8d0/tool-results/hook-bdde8499-d9f9-409e-a509-b42d8365dcde-1-additionalContext.txt`
+- `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/outputs/FEAT-ZD-48600/feat.design.md`
+- `hobasa-design-agent/.claude/skills/design-steps/SKILL.md`
+- `hobasa-design-agent/CLAUDE.md`
+- `ap-aging-sample/CLAUDE.md`
+- `ap-forecast-sample/CLAUDE.md`
+- `ap-pipeline-sample/CLAUDE.md`
+- `ap-portal-sample/CLAUDE.md`
+- `hobasa-agentic-sdlc/CLAUDE.md`
+- `hobasa-agentic-sdlc/features/FEAT-ZD-48600/JOURNEY.md`
+- `hobasa-agentic-sdlc/memory/MEMORY.md`
+- `final_document/hobasa-claude-code-plugin/skills/design-steps/SKILL.md`
+- `final_document/hobasa-claude-code-plugin/skills/grounded-output/SKILL.md`
 
 Shared memory and conventions: `memory/MEMORY.md` and `CLAUDE.md` in the SDLC repository.
 
@@ -30,8 +41,8 @@ Shared memory and conventions: `memory/MEMORY.md` and `CLAUDE.md` in the SDLC re
 - Gate (who approves this output): no gate: automated checks, the independent judge and sampled human evaluation
 
 ## Inputs (GitHub checkout; read them with Read, or context_get for a receipt)
-- feat.trd (Approved TRD): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-01/feat.trd.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.trd.md at commit 3637e51)
-- org.architecture (Platform architecture, contracts and tenancy rules): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-01/org.architecture.md` (from hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.architecture.md at commit 3b03f15)
+- feat.trd (Approved TRD): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-01/feat.trd.md` (from final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.trd.md at commit 3637e51)
+- org.architecture (Platform architecture, contracts and tenancy rules): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-01/org.architecture.md` (from hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.architecture.md at commit b6a392f)
 
 ## Outputs (write each file in full; the spine commits and pushes after evaluation and approval)
 - feat.platform_update (Platform architecture change (when flagged)): write `hobasa-design-agent/outputs/FEAT-ZD-48600/checks/DES-01_feat.platform_update.md`

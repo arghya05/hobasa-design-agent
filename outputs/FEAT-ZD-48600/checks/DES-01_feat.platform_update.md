@@ -1,63 +1,63 @@
 # feat.platform_update: FEAT-ZD-48600 (DES-01 check record)
 
-Step DES-01 Platform Architecture Update, attempt 1, run in **check mode**. The step's condition was not met in this run ("condition not met: TRD flags a platform-level change", record:intake). This record shows what was checked, the evidence, the conclusion, and what would make a platform architecture update necessary. No architecture document, code, configuration, test or environment was changed.
+Step DES-01 Platform Architecture Update, attempt 1, run in **check mode**. The step's condition, "TRD flags a platform-level change", is not met in this run (record:intake). This record states what was checked, the evidence, the conclusion and what would trigger a platform architecture update. No architecture document, code, configuration, test or environment was changed.
 
 | Field | Value | Source |
 |---|---|---|
-| Trace ID | FEAT-ZD-48600 (ZD-48600, "Show which overdue invoices belong to vendors that usually pay late") | record:brief; feat.trd |
-| Workbook action | If the feature needs a platform-level architectural change, update the platform architecture document first | record:brief |
-| Owner / gate | Architect / automated checks, independent judge, sampled human evaluation | record:brief |
-| Inputs | feat.trd (approved TRD, commit 3637e51); org.architecture (feature override, commit 3b03f15) | record:brief |
-| Other files read | `org/org.architecture.md` (base platform document); `org/org.decision_log.md` | file:hobasa-agentic-sdlc/org/org.architecture.md; file:hobasa-agentic-sdlc/org/org.decision_log.md |
+| Trace ID | FEAT-ZD-48600 | record:brief; feat.trd |
+| Step / owner | DES-01 Platform Architecture Update / Architect | record:brief |
+| Mode | Check (condition not met: TRD flags a platform-level change) | record:intake |
+| Inputs read | feat.trd (approved at REQ-07), org.architecture (feature override) | record:brief |
+| Shared memory read | D-2026-031, D-2026-044, D-2026-050; L-007, L-011 | record:memory |
 
-## 1. What was checked
+## 1. What a platform-level change means here
 
-A platform-level change is one that alters something the platform architecture document states as a rule or structure. For each statement in org.architecture (and the base `org/org.architecture.md`), the check asked whether feat.trd changes it.
+org.architecture defines the platform as these elements. A platform-level change is a change to any of them (agent judgement on the scope of "platform level", taken directly from what org.architecture states):
 
-| # | Platform statement | Source of the statement | What feat.trd does | Platform change? | Evidence |
-|---|---|---|---|---|---|
-| P-1 | Four repositories in one flow: ap_pipeline → ap_forecast → ap_aging → ap_portal | org.architecture | Changes code in the same four repositories only; adds no new repository, service or component outside them (C-1 to C-10) | No | feat.trd (header "Repositories"; section 1) |
-| P-2 | Runtimes: three repositories on Python 3.9; ap_portal on Node.js 22 CommonJS | org.architecture | Keeps the runtimes; requires new Python code to avoid syntax newer than 3.9 (F-15) | No | feat.trd (F-15) |
-| P-3 | "Keep every existing signature; add new functions." | org.architecture | Only two existing functions change, both additively: `to_model` behaviour (signature unchanged) and `build_explanation_request` gains `risk=None` as the last parameter. Everything else is new functions. The TRD's own validation row records this as Pass | No (rule respected) | feat.trd (IF-1, IF-4.1, section 9) |
-| P-4 | Existing function signatures and return shapes must not change | file:hobasa-agentic-sdlc/org/org.architecture.md | `to_model` still returns `(records, rejected)`; records gain one key, `paid_date`, and existing keys and values are unchanged. `aging_buckets`, `days_past_due` and `bucket_for` are unchanged (IF-5.8, T-11) | No | feat.trd (IF-1.6, IF-5.8, T-11) |
-| P-5 | JSON between services carries amounts as two-decimal strings and dates as ISO strings | org.architecture | New contract CT-1 (ap_aging → ap_portal) sends `amount` as a two-decimal string and has no date field; any later date must be an ISO string | No (CT-1 applies the existing rule) | feat.trd (IF-6) |
-| P-6 | ap_aging: pure library; no database, no network, no secrets | file:hobasa-agentic-sdlc/org/org.architecture.md | `overdue_with_risk` is a pure function; the serialiser `overdue_rows_to_json` returns a string. The TRD adds no storage, schema migration or new persistent data | No | feat.trd (IF-5.8, C-7, section 3 "Data rules") |
-| P-7 | Tenancy, authentication, finance posting, payment execution | record:brief (guardrail: stop when tenancy or security impact is unclear) | Explicitly not affected; tier T2 | No | feat.trd (section 1 "Not affected"; S-1) |
-| P-8 | LLM provider and model (`acme-llm`, `acme-text-2` from `models.json`) | feat.trd (F-7) | Provider, model and `max_tokens` unchanged; `vendor_risk` uses no LLM | No | feat.trd (IF-3.2, IF-4.4, S-3) |
-| P-9 | Decisions D-2026-031, D-2026-044, D-2026-050 | file:hobasa-agentic-sdlc/org/org.decision_log.md; record:memory | New code follows all three (calendar days, Decimal/string money, paid excluded) | No | feat.trd (section 9) |
-
-## 2. Findings that are near the platform level, and why they do not trigger the action now
-
-| # | Finding | Why it is not a platform update in this step | Source |
+| # | Platform element | Current statement | Source |
 |---|---|---|---|
-| N-1 | No transport or service layer between ap_aging and ap_portal exists in the code read; who owns serialisation and transport is open (TQ-3, R-7). | The TRD's proposal (C-7) keeps serialisation inside ap_aging as a pure function and introduces no new transport. The platform statement "ap_portal renders HTML from JSON" already covers this. If the Architect's answer to TQ-3 introduces a new service, API or transport, that **would** be a platform change (trigger X-1). | feat.trd (IF-6, C-7, R-7, TQ-3); org.architecture |
-| N-2 | `overdue_with_risk` needs a `vendor` key on each invoice, while the base document describes ap_aging invoices as dicts with `id`, `due_date`, `amount`, `paid`. | The requirement belongs to a new function only; the existing invoice shape used by `aging_buckets` is unchanged. ap_pipeline records already carry `vendor`. The record shape is the data model's concern (DES-02 reads org.data_model), not a platform rule. | feat.trd (F-11, IF-5.7); file:hobasa-agentic-sdlc/org/org.architecture.md |
-| N-3 | The platform document names only existing public functions; new public functions (`delays_by_vendor`, `vendor_risk`, `overdue_with_risk`, `overdue_rows_to_json`, `renderOverdueRisk`) will exist. | The platform rule is "add new functions"; adding them is the expected pattern, not a change to the architecture. Listing them is the design document's job (DES-02). Non-blocking question OQ-1 asks whether the Architect wants the function lists in org.architecture refreshed after release. | org.architecture; feat.trd (section 1) |
-| N-4 | Existing code conflicts: `bucket_for(30)` returns `"31-60"` (TQ-1) and `formatAmount` formats through a float (TQ-2). | Both are left unchanged by this feature and raised as separate decisions. Neither changes a platform rule; fixing either is a separate item. | feat.trd (F-10, F-12, TQ-1, TQ-2) |
-| N-5 | The risk label is added to the prompt sent to the external LLM provider (S-5, TQ-8). | Same provider, model and data path as today; only the prompt content grows. It is a data-flow approval question for the Architect, not a structural change. If the answer is "not acceptable" and the provider path must change, trigger X-4 applies. | feat.trd (S-5, TQ-8, IF-4.4) |
+| P-1 | Topology | Four repositories in one flow: ap_pipeline → ap_forecast / ap_aging → ap_portal | org.architecture |
+| P-2 | Runtimes | ap_pipeline, ap_forecast, ap_aging on Python 3.9; ap_portal on Node.js 22 CommonJS | org.architecture |
+| P-3 | Repository roles | ap_pipeline produces Invoice records; ap_forecast predicts payment delay; ap_aging computes aging; ap_portal renders HTML from JSON | org.architecture |
+| P-4 | Inter-service data rule | JSON between services carries amounts as strings with two decimals and dates as ISO strings | org.architecture |
+| P-5 | Compatibility rule | "Keep every existing signature; add new functions." | org.architecture |
+| P-6 | Security and tenancy boundary | No finance posting, authentication, tenancy or payment execution in scope of feature work at tier T2 | feat.trd (S-1) |
+
+## 2. Checks and evidence
+
+| # | Check | Evidence in the TRD | Result |
+|---|---|---|---|
+| CK-1 | Does the feature add, remove or re-order a repository or flow stage (P-1)? | All components C-1 to C-10 sit in the existing four repositories plus a test harness (C-10). The end-to-end wiring IF-8 follows the existing order: pipeline → forecast → aging → portal. | No change |
+| CK-2 | Does it change a runtime or language version (P-2)? | F-15 restates Python 3.9 and Node.js 22 CommonJS and requires new Python code to stay within 3.9 syntax. | No change |
+| CK-3 | Does it move a responsibility between repositories (P-3)? | Each new function stays in the repository that owns its concern: `delays_by_vendor` in ap_pipeline (C-2), `vendor_risk` in ap_forecast (C-4), `overdue_with_risk` and `overdue_rows_to_json` in ap_aging (C-6, C-7), `renderOverdueRisk` in ap_portal (C-8). Lane routing is unchanged (TRD header, org.routing_map). | No change |
+| CK-4 | Does it change the inter-service JSON rule (P-4)? | The new contract CT-1 (IF-6) carries `amount` as a two-decimal string and has no date field; it states that any date added later must be an ISO string. CT-1 is a feature-level contract that **conforms** to P-4; it does not alter the rule. | No change (conforms) |
+| CK-5 | Does it break the compatibility rule (P-5)? | TRD section 9: only CR-1 (`to_model` behaviour) and CR-4 (`risk=None` as last parameter) touch existing functions, both additive, signatures unchanged. `aging_buckets`, `days_past_due`, `bucket_for`, `formatAmount`, `renderAgingSummary` unchanged (IF-5.8, C-9). | No change (rule kept) |
+| CK-6 | Does it add storage, a schema migration, a service, a transport or a network dependency? | TRD section 3: "No storage, schema migration or new persistent data. Every new function is in-memory and pure." IF-6 / R-7: no transport layer exists between ap_aging and ap_portal; C-7 adds only a serialiser function in ap_aging. `vendor_risk` makes no LLM or network call (IF-3.2). | No change |
+| CK-7 | Does it touch the security or tenancy boundary (P-6)? | S-1: no finance posting, authentication, tenancy or payment execution added or changed; tier T2. Section 1 "Not affected" also lists the LLM provider or model and aging export. | No change |
+| CK-8 | Does it change the LLM provider, model or external data flow at platform level? | IF-4.4: provider, model and `max_tokens` still come from `config` / `models.json`, unchanged. S-5: the explanation prompt additionally carries the vendor's risk label to the existing provider (`acme-llm`); this is a content change within an existing data flow, open for the Architect as TQ-8. | No platform change; open data-flow question (TQ-8) |
+| CK-9 | Does the vendor feed change require a platform change? | D-1: feed v3 adds an optional `paid_date` column; schedule unchanged (daily 02:00 Asia/Kolkata). IF-1.1 keeps v2 feeds loading. This is a customer data mapping inside ap_pipeline, not a platform element in org.architecture. | No change |
+| CK-10 | Do the shared decisions need a platform-level rule change? | New code follows D-2026-031 (IF-5.2), D-2026-044 (IF-5.5, IF-6, IF-7.5) and D-2026-050 (IF-5.1) (TRD section 9). Existing-code conflicts F-10 (`bucket_for(30)`) and F-12 (`formatAmount` through float) are raised as separate items TQ-1 and TQ-2, not as platform changes. | No change |
 
 ## 3. Conclusion
 
-**No platform architecture update is needed now.** feat.trd keeps the four-repository flow, the runtimes, every existing signature and return shape, the JSON money/date rule, ap_aging's no-database/no-network property, the LLM provider, and tenancy and security unchanged (P-1 to P-9). All changes are additive functions and one new feature-level contract (CT-1) that applies the existing JSON rule. This agrees with the spine's condition result (record:intake). The org.architecture document stays as it is; the feature design continues in DES-02.
+**No platform-level architecture change is needed for FEAT-ZD-48600 now.** All six platform elements P-1 to P-6 are kept. The feature is a set of additive functions inside the existing four repositories, plus a feature-level JSON contract (CT-1) that conforms to the existing inter-service rule. org.architecture is therefore not updated by this step, and the action "update the platform architectural level document" is not taken.
 
-## 4. What would trigger the action
+Note for later design steps: CT-1 (IF-6) is recorded as a feature contract in the TRD. Whether it should also be registered in the platform architecture as a named inter-service contract is an Architect choice; it does not change any platform rule (non-blocking question Q-1 below).
 
-DES-01 should be re-run in full (the platform architecture document updated before design continues) if any of these happens:
+## 4. What would trigger the action (re-run DES-01 as a real update)
 
-| # | Trigger | Linked item |
+| # | Trigger | Linked open item | Source |
+|---|---|---|---|
+| TR-1 | The Architect decides that a transport, API or service carries CT-1 between ap_aging and ap_portal (new platform component or inter-service channel) | TQ-3, R-7 | feat.trd (IF-6, C-7, R-7, TQ-3) |
+| TR-2 | `bucket_for` or `formatAmount` is fixed as a platform-wide rule change (for example, a bucket boundary or amount-format rule for all consumers) rather than a local fix | TQ-1, TQ-2 | feat.trd (F-10, F-12, R-1, R-2) |
+| TR-3 | Any new function gains storage, a schema migration, or a network / LLM call | — | feat.trd (section 3, IF-3.2) |
+| TR-4 | The LLM provider or model changes, or the Architect rejects sending the risk label to the provider and a new data-handling boundary is needed | TQ-8, PQ-5, R-3 | feat.trd (S-5, IF-4.4, R-3) |
+| TR-5 | A runtime version changes, or an existing signature must change (break of P-5) | — | feat.trd (F-15, section 9); org.architecture |
+| TR-6 | The end-to-end harness (C-10, IF-8) becomes a deployed production component instead of a test | R-9 | feat.trd (C-10, IF-8, R-9) |
+
+## 5. Open questions (none blocking)
+
+| ID | Question | Why it matters |
 |---|---|---|
-| X-1 | The answer to TQ-3 introduces a new service, API endpoint, message transport or other layer between ap_aging and ap_portal | feat.trd (TQ-3, R-7) |
-| X-2 | Any existing public signature or return shape has to change (for example a fix to `bucket_for` that changes aging totals, or a change to `formatAmount`) | feat.trd (TQ-1, TQ-2); org.architecture |
-| X-3 | Persistent storage, a database, network access or secrets are added to any of the four repositories | file:hobasa-agentic-sdlc/org/org.architecture.md; feat.trd (section 3) |
-| X-4 | The LLM provider, model or the external data path changes (for example as an outcome of TQ-8 or PROV-ACME-2026-11, PQ-5) | feat.trd (S-5, TQ-8, R-3) |
-| X-5 | Tenancy, authentication, finance posting or payment execution becomes part of the scope | feat.trd (S-1) |
-| X-6 | A new repository or runtime is added, or the JSON-between-services rule (two-decimal string amounts, ISO dates) has to change | org.architecture |
-
-## 5. Open questions (non-blocking)
-
-| ID | Question |
-|---|---|
-| OQ-1 | Should org.architecture's function lists be refreshed to name the new public functions once FEAT-ZD-48600 is released (N-3)? This is documentation upkeep, not an architectural change. |
-| OQ-2 | Two platform documents exist with different scope: the feature override (four repositories) and the base `org/org.architecture.md` (ap_aging only). Should the base document be widened to the four-repository flow so later items do not depend on a feature override? |
-
-TRD questions TQ-1 to TQ-11 stay open with the Architect as raised in feat.trd; this check does not answer them.
+| Q-1 | Should CT-1 be registered in org.architecture as a named inter-service contract, or stay a feature-level contract in feat.trd? | Discoverability for other features; no platform rule changes either way |
+| Q-2 | Carried: TQ-3 (owner of serialisation and transport between ap_aging and ap_portal) and TQ-8 (risk label sent to the external provider). Either answer may hit TR-1 or TR-4. | Could turn this check into a real platform update |
