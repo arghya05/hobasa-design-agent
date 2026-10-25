@@ -8,7 +8,7 @@
 
 ## Inputs (GitHub checkout; read them with Read, or context_get for a receipt)
 - feat.trd (Approved TRD): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-01/feat.trd.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.trd.md at commit 3637e51)
-- org.architecture (Platform architecture, contracts and tenancy rules): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-01/org.architecture.md` (from hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.architecture.md at commit 70aad33)
+- org.architecture (Platform architecture, contracts and tenancy rules): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-01/org.architecture.md` (from hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.architecture.md at commit 76d03ce)
 
 ## Outputs (write each file in full; the spine commits and pushes after evaluation and approval)
 - feat.platform_update (Platform architecture change (when flagged)): write `hobasa-design-agent/outputs/FEAT-ZD-48600/checks/DES-01_feat.platform_update.md`
