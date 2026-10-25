@@ -7,16 +7,16 @@
 - Gate (who approves this output): Architect, UX lead
 
 ## Inputs (GitHub checkout; read them with Read, or context_get for a receipt)
-- feat.prd (Approved PRD): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-02/feat.prd.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.prd.md at commit 908b58d)
-- feat.prototype (FigJam flow and Figma Make prototype): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-02/feat.prototype.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.prototype.md at commit 8fce3b3)
-- feat.trd (Approved TRD): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-02/feat.trd.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.trd.md at commit 3637e51)
-- org.architecture (Platform architecture, contracts and tenancy rules): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-02/org.architecture.md` (from hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.architecture.md at commit a6b3e2a)
-- org.data_model (Data Model and Knowledge Graph): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-02/org.data_model.md` (from hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.data_model.md at commit a6b3e2a)
-- org.design_library (Hobasa design library and variables (tokens)): `hobasa-design-agent/inputs/FEAT-ZD-48600/DES-02/org.design_library.md` (from hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.design_library.md at commit a6b3e2a)
+- feat.prd (Approved PRD): `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-02/feat.prd.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.prd.md at commit 908b58d)
+- feat.prototype (FigJam flow and Figma Make prototype): `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-02/feat.prototype.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.prototype.md at commit 8fce3b3)
+- feat.trd (Approved TRD): `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-02/feat.trd.md` (from hobasa-requirement-agent/outputs/FEAT-ZD-48600/feat.trd.md at commit 3637e51)
+- org.architecture (Platform architecture, contracts and tenancy rules): `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-02/org.architecture.md` (from hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.architecture.md at commit a6b3e2a)
+- org.data_model (Data Model and Knowledge Graph): `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-02/org.data_model.md` (from hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.data_model.md at commit a6b3e2a)
+- org.design_library (Hobasa design library and variables (tokens)): `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/inputs/FEAT-ZD-48600/DES-02/org.design_library.md` (from hobasa-agentic-sdlc/features/FEAT-ZD-48600/org-overrides/org.design_library.md at commit a6b3e2a)
 
 ## Outputs (write each file in full; the spine commits and pushes after evaluation and approval)
-- feat.design (HLD, LLD and contracts): write `hobasa-design-agent/outputs/FEAT-ZD-48600/feat.design.md`
-- feat.screens (Approved final Figma screens): write `hobasa-design-agent/outputs/FEAT-ZD-48600/feat.screens.md`
+- feat.design (HLD, LLD and contracts): write `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/outputs/FEAT-ZD-48600/feat.design.md`
+- feat.screens (Approved final Figma screens): write `final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/outputs/FEAT-ZD-48600/feat.screens.md`
 
 ## Design document and coding plan
 Write the design as a High-Level Design section (context, components, interfaces and data contracts between repositories, data flow, non-functional needs) and a Low-Level Design section per repository (modules, functions with signatures, data structures, error handling, tests to add). End with one line exactly as `Coding plan: <stages>` over the coding lanes BE (ap_aging), DS (ap_forecast), DE (ap_pipeline), FE (ap_portal): stages run in order separated by `->`, lanes in the same stage run in parallel joined by `+` (for example `DE + DS -> BE -> FE`). Put a lane after another only when it must build on that lane's finished code; lanes that only share a documented data contract run in parallel.

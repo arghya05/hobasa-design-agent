@@ -98,7 +98,7 @@
         "tool_name": "Bash",
         "tool_use_id": "toolu_01TM41a5BNs5MTga2ffWrNn4",
         "tool_input": {
-          "command": "tail -n 3 hobasa-design-agent/outputs/FEAT-ZD-48600/feat.design.md; grep -c \"^Coding plan:\" hobasa-design-agent/outputs/FEAT-ZD-48600/feat.design.md",
+          "command": "tail -n 3 final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/outputs/FEAT-ZD-48600/feat.design.md; grep -c \"^Coding plan:\" final_document/e2e-run/runs/run-20261025-123936-feat-zd-48600/workspace/agents/hobasa-design-agent/outputs/FEAT-ZD-48600/feat.design.md",
           "description": "Check the design ends with one coding-plan line"
         }
       }
